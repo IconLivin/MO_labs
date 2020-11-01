@@ -21,11 +21,19 @@ def func1(x):
 
 R = CoordSys3D('')
 
-gradX, gradY = sympy.symbols(('x y'))
+gradX, gradY = sympy.symbols(('x1 x2'))
 
 s1 = ((sympy.sin(R.x) * sympy.sin(R.y)) / (R.x * R.y))
 
-print(gradient(s1))
+_gradient = str(gradient(s1)).replace('.', '')
+
+_gradient = _gradient.replace('**','^')
+
+_gradient = _gradient.replace('*',' * ')
+
+_gradient = _gradient.replace('/',' / ')
+
+print(_gradient)
 
 x, y , z = makeData()
 
@@ -36,10 +44,7 @@ res = optimize.minimize(func1, x0=begin)
 fig = pylab.figure()
 axes = Axes3D(fig)
 
-axes.scatter3D(begin[0], begin[1], func(begin[0], begin[1]), s=100, color='blue')
+axes.scatter3D(begin[0], begin[1], func(begin[0], begin[1]), s=50, color='blue')
 axes.plot_surface(x, y, z, color='green', alpha=0.2)
-axes.scatter3D(res.x[0],res.x[1], func(res.x[0],res.x[1]), s=100, color='red')
+axes.scatter3D(res.x[0],res.x[1], func(res.x[0],res.x[1]), s=50, color='red')
 pylab.show()
-
-
-
