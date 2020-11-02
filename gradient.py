@@ -1,5 +1,5 @@
 from mpl_toolkits.mplot3d import Axes3D
-import scipy as sc, sympy, numpy, pylab
+import scipy as sc, sympy, numpy, pylab,matplotlib.pyplot as plt
 from scipy import optimize
 from sympy.vector import CoordSys3D, gradient
 
@@ -41,10 +41,17 @@ begin = (2,1)
 
 res = optimize.minimize(func1, x0=begin)
 
+f,ax = plt.subplots()
+
+ax.contour(z)
+
 fig = pylab.figure()
 axes = Axes3D(fig)
+
+ax.contour(func(x,y))
 
 axes.scatter3D(begin[0], begin[1], func(begin[0], begin[1]), s=50, color='blue')
 axes.plot_surface(x, y, z, color='green', alpha=0.2)
 axes.scatter3D(res.x[0],res.x[1], func(res.x[0],res.x[1]), s=50, color='red')
 pylab.show()
+plt.show()
